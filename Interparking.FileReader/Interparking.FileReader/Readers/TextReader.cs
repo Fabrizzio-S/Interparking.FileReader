@@ -2,11 +2,25 @@
 using System;
 using System.IO;
 
-namespace Interparking.FileReader.Helpers
+namespace Interparking.FileReader.Readers
 {
-    public class FileReaderHelper : IFileReaderHelper
+    public class TextReader : IReader
     {
-        public string ReadFile(string path)
+        #region IReader Implementation
+
+        public string Read(string path)
+        {
+            VerifyPath(path);
+            return File.ReadAllText(path);
+        }
+
+        #endregion
+
+        #region Business
+
+        #region Private
+
+        private void VerifyPath(string path)
         {
             if (path == null)
             {
@@ -16,7 +30,10 @@ namespace Interparking.FileReader.Helpers
             {
                 throw new ArgumentException($"{nameof(path)} should not be empty");
             }
-            return File.ReadAllText(path);
         }
+
+        #endregion
+
+        #endregion
     }
 }

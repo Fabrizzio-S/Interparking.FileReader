@@ -1,16 +1,16 @@
-using Interparking.FileReader.Helpers;
 using Interparking.FileReader.Interfaces;
+using Interparking.FileReader.Readers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Interparking.FileReader.Test
 {
     [TestClass]
-    public class FileReaderHelperTest
+    public class XmlReaderTest
     {
         #region Variables Declaration
 
-        private IFileReaderHelper fileReaderHelper;
+        private IReader reader;
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace Interparking.FileReader.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            fileReaderHelper = new FileReaderHelper();
+            reader = new XmlReader();
         }
 
         #endregion
@@ -28,23 +28,23 @@ namespace Interparking.FileReader.Test
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ReadFile_PathNull_Test()
+        public void ReadXml_PathNull_Test()
         {
-            fileReaderHelper.ReadFile(null);
+            reader.Read(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadFile_PathEmpty_Test()
+        public void ReadXml_PathEmpty_Test()
         {
-            fileReaderHelper.ReadFile("   ");
+            reader.Read("   ");
         }
 
         [TestMethod]
-        public void ReadFile_Test()
+        public void ReadXml_Test()
         {
-            string text = fileReaderHelper.ReadFile(".\\ReadFile.txt");
-            Assert.IsNotNull(text);
+            string xml = reader.Read(".\\ReadXml.xml");
+            Assert.IsNotNull(xml);
         }
 
         #endregion
