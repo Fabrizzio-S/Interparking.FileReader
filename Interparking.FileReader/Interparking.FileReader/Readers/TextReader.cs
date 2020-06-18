@@ -6,12 +6,37 @@ namespace Interparking.FileReader.Readers
 {
     public class TextReader : IReader
     {
+        #region Variables Declaration
+
+        private readonly IEncryption encryption;
+
+        #endregion
+
+        #region Constructor
+
+        public TextReader(IEncryption encryption)
+        {
+            this.encryption = encryption;
+        }
+
+        #endregion
+
         #region IReader Implementation
 
         public string Read(string path)
         {
             VerifyPath(path);
             return File.ReadAllText(path);
+        }
+
+        public string Read(string path, bool decryptFile)
+        {
+            string text = Read(path);
+            if (!decryptFile)
+            {
+                return text;
+            }
+            return encryption.Decrypt(text);
         }
 
         #endregion

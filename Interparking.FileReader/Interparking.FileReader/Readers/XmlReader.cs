@@ -17,6 +17,11 @@ namespace Interparking.FileReader.Readers
             return xmlDocument.InnerXml;
         }
 
+        public string Read(string path, bool decryptFile)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Business
