@@ -21,7 +21,7 @@ namespace Interparking.FileReader.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            Mock<IEncryption> encryctionMock = new Mock<IEncryption>();
+            var encryctionMock = new Mock<IEncryption>();
             encryctionMock.Setup(x => x.Decrypt(It.IsAny<string>())).Returns((string x) => Reverse(x));
             reader = new TextReader(encryctionMock.Object);
         }
